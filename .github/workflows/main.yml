@@ -12,7 +12,9 @@ jobs:
   build:
     name: Build and Run
     runs-on: ubuntu-latest
-
+    permissions:
+      ports: 80
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -26,4 +28,5 @@ jobs:
         run: go mod download
 
       - name: Build and run Go program
-        run: go run main.go
+        run: go run main.go --port 80
+        
