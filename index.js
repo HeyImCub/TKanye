@@ -5,7 +5,7 @@ let KanyeFirst = false
 function getFile(max, person) {
     return new Promise((resolve, reject) => {
       let randNum = Math.floor(Math.random() * (max - 1));
-      fetch("https://raw.githubusercontent.com/HeyImCub/TKanye/main/"+person+"_output_"+randNum+".txt")
+      fetch('/' + person + "_output_" + randNum + ".txt")
         .then(response => response.text())
         .then(data => {
           const lines = data.split('\n'); // Split data into an array of lines
@@ -46,20 +46,22 @@ async function SetLyrics(){
 
 
 function CalculateGame(){
-    const people1Guess = document.getElementById("People1").value;
-    const people2Guess = document.getElementById("People2").value;
+    const people1Guess = document.getElementById("dropdownMenuButton").textContent;
+    const people2Guess = document.getElementById("dropdownMenuButton2").textContent;
     if(people1Guess == people2Guess){
         return alert("Please select two seperate artists")
     }
     console.log(KanyeFirst)
+    console.log(people1Guess)
+    console.log(people2Guess)
     if(KanyeFirst) {
-        if (people1Guess == "Kanye"){
+        if (people1Guess == "Kanye West"){
             document.getElementById("Result").textContent = "Correct!"
         }else{
             document.getElementById("Result").textContent = "Incorrect"
         }
     }else{
-        if (people1Guess == "Taylor"){
+        if (people1Guess == "Taylor Swift"){
             document.getElementById("Result").textContent = "Correct!"
         }else{
             document.getElementById("Result").textContent = "Incorrect"
@@ -73,15 +75,15 @@ function setSelectedArtist(buttonId, artist) {
 }
 
 document.addEventListener("click", function(event) {
-    const dropdownItem = event.target;
-    const dropdownMenu = dropdownItem.closest(".dropdown-menu");
+  const dropdownItem = event.target;
+  const dropdownMenu = dropdownItem.closest(".dropdown-menu");
+  
+  // Check if the clicked element is inside a dropdown menu
+  if (dropdownMenu) {
+    const button = dropdownMenu.previousElementSibling;
+    const artist = dropdownItem.textContent.trim();
+    const buttonId = button.id;
     
-    // Check if the clicked element is inside a dropdown menu
-    if (dropdownMenu) {
-      const button = dropdownMenu.previousElementSibling;
-      const artist = dropdownItem.textContent.trim();
-      const buttonId = button.id;
-      
-      setSelectedArtist(buttonId, artist);
-    }
-  });
+    setSelectedArtist(buttonId, artist);
+  }
+});
