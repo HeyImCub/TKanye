@@ -22,10 +22,8 @@ jobs:
         with:
           go-version: 1.18 # Replace with the desired Go version
 
-      - name: Set WD
-        run: cd TKanye
       - name: Fetch dependencies
-        run: go mod download
+        run: cd TKanye && go mod download
 
       - name: Build and run Go program
-        run: go run main.go
+        run: go run TKanye/main.go
