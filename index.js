@@ -5,7 +5,7 @@ let KanyeFirst = false
 function getFile(max, person) {
     return new Promise((resolve, reject) => {
       let randNum = Math.floor(Math.random() * (max - 1));
-      fetch('/' + person + "_output_" + randNum + ".txt")
+      fetch("https://raw.githubusercontent.com/HeyImCub/TKanye/main/"+person+"_output_"+randNum+".txt")
         .then(response => response.text())
         .then(data => {
           const lines = data.split('\n'); // Split data into an array of lines
