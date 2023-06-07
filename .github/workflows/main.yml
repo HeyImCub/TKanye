@@ -1,0 +1,19 @@
+name: Go
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.17'
+      - name: Install dependencies
+        run: go get ./TKanye
+      - name: Build
+        run: go build -v ./TKanye/
+      - name: Test with the Go CLI
+        run: go test
